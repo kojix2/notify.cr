@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - CI
+      - CI2
   pull_request:
   schedule:
     - cron: "0 12 * * *"
@@ -25,5 +25,7 @@ jobs:
           shards install
       - name : build
         run: crystal build src/notify.cr
-      # - name: Run specs
-      #   run: crystal spec
+      - name: Run headless test
+        uses: coactions/setup-xvfb@v1
+        with:
+          run: crystal spec
